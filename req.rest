@@ -1,0 +1,85 @@
+### Get all users
+GET http://localhost:8081/users
+
+### Get a specific user
+GET http://localhost:8081/users/smith_account2
+
+### Get a specific user - testing for no existing user
+GET http://localhost:8081/users/smith_john
+
+### Create a user
+POST http://localhost:8081/users
+Content-Type: application/json
+
+{
+    "firstName": "Johnt",
+    "lastName": "Smith",
+    "emailAddress": "smithjohn@gmail.com",
+    "username": "smith_john",
+    "statusText": "I love my life of software development",
+    "password": "123456789",
+    "profilePhoto": "https://example.com/jane_smith.jpg",
+    "coverPhoto": "https://example.com/jane_smith_cover.jpg"
+}
+
+### Delete a user
+DELETE http://localhost:8081/users/smith_account2
+
+### Get a specific user - testing for no existing user
+GET http://localhost:8081/users/smith_john
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "firstName": "JohnNewName"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "lastName": "smithlastnamenew"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "emailAddress": "smithjohn254@gmail.com"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "statusText": "I love my life of software development and bringing softwares to life"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "password": "I_am_smith-thegreatest_who_knows"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "profilePhoto": "https://example2-new.com/jane_smith.jpg"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/smith_john
+Content-Type: application/json
+
+{
+    "coverPhoto": "https://example-3.com/jane_smith_cover.jpg"
+}
