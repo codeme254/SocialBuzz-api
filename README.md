@@ -1,14 +1,16 @@
 ## Api for the social buzz frontend
+
 ### This project was done as final project for the 3 months jitu software development bootcamp.
 
-```NodeJS```, ```ExpressJS```, ```SQL (mssql)```, ```Azure```, ```jsonwebtoken```, ```cors```, ```bcrypt```
+`NodeJS`, `ExpressJS`, `SQL (mssql)`, `Azure`, `jsonwebtoken`, `cors`, `bcrypt`
 
 ## Installation and usage
+
 1. Clone this repository
 
-1. ```cd backend```
+1. `cd backend`
 
-1. ```npm install``` to install all the dev dependencies
+1. `npm install` to install all the dev dependencies
 
 1. Fill in your own .env details as shown below
 
@@ -36,4 +38,4 @@ SQL_DB=Create_Your_DB_on_mssql_and_insert_name-here
 
 JWT_SALT=CREATE_A_SALT
 
-1. Finally, run ```npm run devStart```, to spin the local development server
+1. Finally, run `npm run devStart`, to spin the local development server

@@ -83,3 +83,30 @@ Content-Type: application/json
 {
     "coverPhoto": "https://example-3.com/jane_smith_cover.jpg"
 }
+
+### Login user
+POST http://localhost:8081/auth/users/login
+Content-Type: application/json
+
+{
+    "loginEntity": "",
+    "password": "123456789"
+}
+
+### Login user
+POST http://localhost:8081/auth/users/login
+Content-Type: application/json
+
+{
+    "loginEntity": "eve@gmail.com",
+    "password": "12345678"
+}
+
+### Login user
+POST http://localhost:8081/auth/users/login
+Content-Type: application/json
+
+{
+    "loginEntity": "eve",
+    "password": "12345678"
+}
