@@ -89,7 +89,7 @@ PATCH http://localhost:8081/users/eve
 Content-Type: application/json
 
 {
-    "newUsername": "jane_smith"
+    "firstName": "eva"
 }
 
 ### Update user information

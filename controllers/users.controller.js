@@ -106,11 +106,9 @@ export const updateUserInformation = async (req, res) => {
     }
     if (newEmailAddress) {
       if (await checkIfEmailIsTaken(newEmailAddress))
-        return res
-          .status(409)
-          .json({
-            message: `Email address ${newEmailAddress} is already in use`,
-          });
+        return res.status(409).json({
+          message: `Email address ${newEmailAddress} is already in use`,
+        });
       inputParameters.input("newEmailAddress", mssql.VarChar, newEmailAddress);
       updateQuery +=
         " emailAddress = @newEmailAddress, dateUpdated = GETDATE(),";
@@ -148,10 +146,26 @@ export const updateUserInformation = async (req, res) => {
     updateQuery += " WHERE username = @username";
 
     await inputParameters.query(updateQuery);
-
-    return res.status(200).json({
-      message: `User information for ${username} updated successfully`,
-    });
+    const userUpdatedInformation = await pool
+      .request()
+      .input("username", mssql.VarChar, username)
+      .query("SELECT * FROM users WHERE username = @username");
+    const user = userUpdatedInformation.recordset[0];
+    const payload = {
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      emailAddress: user.emailAddress,
+      statusText: user.statusText,
+      profilePhoto: user.profilePhoto,
+      coverPhoto: user.coverPhoto,
+      dateCreated: user.dateCreated,
+      dateUpdated: user.dateUpdated,
+      numberOfFollowers: user.numberOfFollowers,
+      numberOfFollowing: user.numberOfFollowing,
+      numberOfPosts: user.numberOfPosts,
+    };
+    return res.status(200).json(payload);
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
