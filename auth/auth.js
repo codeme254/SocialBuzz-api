@@ -37,6 +37,9 @@ export const loginUser = async (req, res) => {
           coverPhoto: userLoginIn.coverPhoto,
           dateCreated: userLoginIn.dateCreated,
           dateUpdated: userLoginIn.dateUpdated,
+          numberOfFollowers: userLoginIn.numberOfFollowers,
+          numberOfFollowing: userLoginIn.numberOfFollowing,
+          numberOfPosts: userLoginIn.numberOfPosts,
         };
         jwt.sign(userPayload, jwtSalt, {}, (err, token) => {
           if (err) throw err;

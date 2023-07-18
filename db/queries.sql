@@ -16,6 +16,8 @@ CREATE TABLE users (
 
 
 
+
+
 INSERT INTO users (username, firstName, lastName, emailAddress, statusText, password, profilePhoto, coverPhoto)
 VALUES ('john_doe', 'John', 'Doe', 'john.doe@example.com', 'Active user', 'password123', 'https://example.com/john_doe.jpg', 'https://example.com/john_doe_cover.jpg');
 

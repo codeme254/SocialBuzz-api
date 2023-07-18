@@ -86,11 +86,12 @@ export const updateUserInformation = async (req, res) => {
   const {
     firstName,
     lastName,
-    emailAddress,
+    newEmailAddress,
     statusText,
     password,
     profilePhoto,
     coverPhoto,
+    newUsername,
   } = req.body;
   try {
     let updateQuery = "UPDATE users SET";
@@ -103,9 +104,24 @@ export const updateUserInformation = async (req, res) => {
       inputParameters.input("lastName", mssql.VarChar, lastName);
       updateQuery += " lastName = @lastName, dateUpdated = GETDATE(),";
     }
-    if (emailAddress) {
-      inputParameters.input("emailAddress", mssql.VarChar, emailAddress);
-      updateQuery += " emailAddress = @emailAddress, dateUpdated = GETDATE(),";
+    if (newEmailAddress) {
+      if (await checkIfEmailIsTaken(newEmailAddress))
+        return res
+          .status(409)
+          .json({
+            message: `Email address ${newEmailAddress} is already in use`,
+          });
+      inputParameters.input("newEmailAddress", mssql.VarChar, newEmailAddress);
+      updateQuery +=
+        " emailAddress = @newEmailAddress, dateUpdated = GETDATE(),";
+    }
+    if (newUsername) {
+      if (await checkIfUserExists(newUsername))
+        return res
+          .status(409)
+          .json({ message: `Username ${newUsername} is already in use` });
+      inputParameters.input("newUsername", mssql.VarChar, newUsername);
+      updateQuery += " username = @newUsername, dateUpdated = GETDATE(),";
     }
     if (statusText) {
       inputParameters.input("statusText", mssql.VarChar, statusText);

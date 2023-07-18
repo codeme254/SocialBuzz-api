@@ -84,6 +84,22 @@ Content-Type: application/json
     "coverPhoto": "https://example-3.com/jane_smith_cover.jpg"
 }
 
+### Update user information
+PATCH http://localhost:8081/users/eve
+Content-Type: application/json
+
+{
+    "newUsername": "jane_smith"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/eve
+Content-Type: application/json
+
+{
+    "newEmailAddress": "jane.smith@example.com"
+}
+
 ### Login user
 POST http://localhost:8081/auth/users/login
 Content-Type: application/json
@@ -110,3 +126,5 @@ Content-Type: application/json
     "loginEntity": "eve",
     "password": "12345678"
 }
+
+# on update, return the updated user object which will also be used to update state in the frontend
