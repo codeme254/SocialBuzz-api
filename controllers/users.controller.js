@@ -98,11 +98,11 @@ export const updateUserInformation = async (req, res) => {
     const inputParameters = pool.request();
     if (firstName) {
       inputParameters.input("firstName", mssql.VarChar, firstName);
-      updateQuery += " firstName = @firstName, dateUpdated = GETDATE(),";
+      updateQuery += " firstName = @firstName,";
     }
     if (lastName) {
       inputParameters.input("lastName", mssql.VarChar, lastName);
-      updateQuery += " lastName = @lastName, dateUpdated = GETDATE(),";
+      updateQuery += " lastName = @lastName,";
     }
     if (newEmailAddress) {
       if (await checkIfEmailIsTaken(newEmailAddress))
@@ -110,8 +110,7 @@ export const updateUserInformation = async (req, res) => {
           message: `Email address ${newEmailAddress} is already in use`,
         });
       inputParameters.input("newEmailAddress", mssql.VarChar, newEmailAddress);
-      updateQuery +=
-        " emailAddress = @newEmailAddress, dateUpdated = GETDATE(),";
+      updateQuery += " emailAddress = @newEmailAddress,";
     }
     if (newUsername) {
       if (await checkIfUserExists(newUsername))
@@ -119,11 +118,11 @@ export const updateUserInformation = async (req, res) => {
           .status(409)
           .json({ message: `Username ${newUsername} is already in use` });
       inputParameters.input("newUsername", mssql.VarChar, newUsername);
-      updateQuery += " username = @newUsername, dateUpdated = GETDATE(),";
+      updateQuery += " username = @newUsername,";
     }
     if (statusText) {
       inputParameters.input("statusText", mssql.VarChar, statusText);
-      updateQuery += " statusText = @statusText, dateUpdated = GETDATE(),";
+      updateQuery += " statusText = @statusText,";
     }
     if (password) {
       inputParameters.input(
@@ -131,16 +130,17 @@ export const updateUserInformation = async (req, res) => {
         mssql.VarChar,
         bcrypt.hashSync(password, bcryptSaltRounds)
       );
-      updateQuery += " password = @password, dateUpdated = GETDATE(),";
+      updateQuery += " password = @password,";
     }
     if (profilePhoto) {
       inputParameters.input("profilePhoto", mssql.VarChar, profilePhoto);
-      updateQuery += " profilePhoto = @profilePhoto, dateUpdated = GETDATE(),";
+      updateQuery += " profilePhoto = @profilePhoto,";
     }
     if (coverPhoto) {
       inputParameters.input("coverPhoto", mssql.VarChar, coverPhoto);
-      updateQuery += " coverPhoto = @coverPhoto, dateUpdated = GETDATE(),";
+      updateQuery += " coverPhoto = @coverPhoto,";
     }
+    updateQuery += "dateUpdated = GETDATE(),";
     updateQuery = updateQuery.slice(0, -1);
     inputParameters.input("username", mssql.VarChar, username);
     updateQuery += " WHERE username = @username";
