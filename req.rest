@@ -29,63 +29,48 @@ DELETE http://localhost:8081/users/smith_account2
 GET http://localhost:8081/users/smith_john
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
+PATCH http://localhost:8081/users/kellen
 Content-Type: application/json
 
 {
-    "firstName": "JohnNewName"
+    "firstName": "Kellen"
 }
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
+PATCH http://localhost:8081/users/kellen
 Content-Type: application/json
 
 {
-    "lastName": "smithlastnamenew"
+    "lastName": "Gitahii"
 }
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
+PATCH http://localhost:8081/users/kellen
 Content-Type: application/json
 
 {
-    "emailAddress": "smithjohn254@gmail.com"
+    "newEmailAddress": "kellen_@gmail.com"
 }
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
+PATCH http://localhost:8081/users/kellen
 Content-Type: application/json
 
 {
-    "statusText": "I love my life of software development and bringing softwares to life"
+    "statusText": "do what you do best and be happy doing it darling"
 }
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
+PATCH http://localhost:8081/users/kellen
 Content-Type: application/json
 
 {
-    "password": "I_am_smith-thegreatest_who_knows"
+    "password": "112345678"
 }
 
-### Update user information
-PATCH http://localhost:8081/users/smith_john
-Content-Type: application/json
-
-{
-    "profilePhoto": "https://example2-new.com/jane_smith.jpg"
-}
 
 ### Update user information
-PATCH http://localhost:8081/users/smith_john
-Content-Type: application/json
-
-{
-    "coverPhoto": "https://example-3.com/jane_smith_cover.jpg"
-}
-
-### Update user information
-PATCH http://localhost:8081/users/eve
+PATCH http://localhost:8081/users/I_am-eve
 Content-Type: application/json
 
 {
@@ -93,11 +78,19 @@ Content-Type: application/json
 }
 
 ### Update user information
-PATCH http://localhost:8081/users/eve
+PATCH http://localhost:8081/users/I_am-eve
 Content-Type: application/json
 
 {
-    "newEmailAddress": "jane.smith@example.com"
+    "newUsername": "this_is_eve"
+}
+
+### Update user information
+PATCH http://localhost:8081/users/I_am-eve
+Content-Type: application/json
+
+{
+    "newEmailAddress": "eve22@gmail.com"
 }
 
 ### Login user

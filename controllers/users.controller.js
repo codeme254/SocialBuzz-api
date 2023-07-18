@@ -98,7 +98,7 @@ export const updateUserInformation = async (req, res) => {
     const inputParameters = pool.request();
     if (firstName) {
       inputParameters.input("firstName", mssql.VarChar, firstName);
-      updateQuery += " firstName = @firstName,";
+      updateQuery += " firstName = @firstName, ";
     }
     if (lastName) {
       inputParameters.input("lastName", mssql.VarChar, lastName);
@@ -146,11 +146,24 @@ export const updateUserInformation = async (req, res) => {
     updateQuery += " WHERE username = @username";
 
     await inputParameters.query(updateQuery);
-    const userUpdatedInformation = await pool
-      .request()
-      .input("username", mssql.VarChar, username)
-      .query("SELECT * FROM users WHERE username = @username");
-    const user = userUpdatedInformation.recordset[0];
+
+    let updatedUserInformation;
+    if (newUsername) {
+      // get based on the updated username
+      updatedUserInformation = await pool
+        .request()
+        .input("newUsername", mssql.VarChar, newUsername)
+        .query("SELECT * FROM users WHERE username = @newUsername");
+    } else {
+      // fallbak to the original username in querying
+      updatedUserInformation = await pool
+        .request()
+        .input("username", mssql.VarChar, username)
+        .query("SELECT * FROM users WHERE username = @username");
+    }
+
+    const user = updatedUserInformation.recordset[0];
+    // return res.send(user)
     const payload = {
       username: user.username,
       firstName: user.firstName,
