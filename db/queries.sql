@@ -11,12 +11,11 @@ CREATE TABLE users (
   profilePhoto VARCHAR(255),
   coverPhoto VARCHAR(255),
   dateCreated DATETIME DEFAULT GETDATE(),
-  dateUpdated DATE DEFAULT CAST(GETDATE() AS DATE)
+  dateUpdated DATE DEFAULT CAST(GETDATE() AS DATE),
+  numberOfFollowers INT DEFAULT 0,
+  numberOfFollowing INT DEFAULT 0,
+  numberOfPosts INT DEFAULT 0
 );
-
-
-
-
 
 INSERT INTO users (username, firstName, lastName, emailAddress, statusText, password, profilePhoto, coverPhoto)
 VALUES ('john_doe', 'John', 'Doe', 'john.doe@example.com', 'Active user', 'password123', 'https://example.com/john_doe.jpg', 'https://example.com/john_doe_cover.jpg');

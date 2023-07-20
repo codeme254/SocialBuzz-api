@@ -2,7 +2,7 @@
 GET http://localhost:8081/users
 
 ### Get a specific user
-GET http://localhost:8081/users/smith_account2
+GET http://localhost:8081/users/john_doe
 
 ### Get a specific user - testing for no existing user
 GET http://localhost:8081/users/smith_john
@@ -121,3 +121,90 @@ Content-Type: application/json
 }
 
 # on update, return the updated user object which will also be used to update state in the frontend
+
+
+### get all posts
+GET http://localhost:8081/posts
+
+### create a post
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doees"
+}
+
+### create a post - no image and text
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doe"
+}
+
+### create a post - text
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "image": "https://example.com/image.png"
+}
+
+### another post
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "image": "https://example.com/image.png",
+    "text": "am getting married next week, I just wanted to tell you this is her"
+}
+
+### create a post - text
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "text": "I am going to miami next week, whose coming"
+}
+
+### create a post - text
+POST http://localhost:8081/posts
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "text": "I am going to miami next week, whose coming",
+    "image": "https://example.com/image.png"
+}
+
+### get a single post
+GET http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+
+### update a post
+PATCH http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "text": "am getting married next week, I just wanted to tell you this is her, and I really love her"
+}
+
+### update a post
+PATCH http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+Content-Type: application/json
+
+{
+    "username": "john_doe",
+    "image": "https://example.com/image-new.png"
+}
+
+### DELETE A POST
+DELETE http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+Content-Type: application/json
+
+{
+    "username": "john_doe"
+}
