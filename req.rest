@@ -201,12 +201,15 @@ Content-Type: application/json
     "image": "https://example.com/image-new.png"
 }
 
+### get all posts
+GET http://localhost:8081/posts
+
 ### DELETE A POST
-DELETE http://localhost:8081/posts/12298426-9f66-465c-a94b-7c1a7e65bd71
+DELETE http://localhost:8081/posts/d247268b-5a8c-4d00-9b18-d761b29ebe21
 Content-Type: application/json
 
 {
-    "username": "john_doe"
+    "username": "doe"
 }
 
 
