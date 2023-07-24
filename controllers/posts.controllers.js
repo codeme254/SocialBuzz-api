@@ -13,7 +13,17 @@ export const getAllPosts = async (req, res) => {
       .query("SELECT * FROM postsPopulated WHERE author != 'john_doe'");
     if (posts.recordsets[0].length <= 0)
       return res.status(204).json({ message: "No posts at this time" });
-    return res.status(200).json(posts.recordsets[0]);
+    
+    const allPosts = posts.recordsets[0]
+    for (let i = 0; i < allPosts.length; i++){
+      const currentPostAuthor = allPosts[i].author;
+      const authorDetails = await pool.request()
+      .input("author", mssql.VarChar, currentPostAuthor)
+      .query('SELECT firstName, lastName, username, profilePhoto FROM users WHERE username = @author');
+      // console.log(authorDetails.recordset[0])
+      allPosts[i].author = authorDetails.recordset[0]
+    }
+    return res.send(allPosts)
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
