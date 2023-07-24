@@ -2,20 +2,20 @@
 GET http://localhost:8081/users
 
 ### Get a specific user
-GET http://localhost:8081/users/john_doe
+GET http://localhost:8081/users/dennis_otwoma
 
 ### Get a specific user - testing for no existing user
-GET http://localhost:8081/users/smith_john
+GET http://localhost:8081/users/smith_john1
 
 ### Create a user
 POST http://localhost:8081/users
 Content-Type: application/json
 
 {
-    "firstName": "Johnt",
-    "lastName": "Smith",
-    "emailAddress": "smithjohn@gmail.com",
-    "username": "smith_john",
+    "firstName": "Johnt1",
+    "lastName": "Smith1",
+    "emailAddress": "smithjohn1@gmail.com",
+    "username": "smith_john1",
     "statusText": "I love my life of software development",
     "password": "123456789",
     "profilePhoto": "https://example.com/jane_smith.jpg",
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Delete a user
-DELETE http://localhost:8081/users/smith_account2
+DELETE http://localhost:8081/users/smith_john1
 
 ### Get a specific user - testing for no existing user
 GET http://localhost:8081/users/smith_john
@@ -98,7 +98,7 @@ POST http://localhost:8081/auth/users/login
 Content-Type: application/json
 
 {
-    "loginEntity": "",
+    "loginEntity": "smith_john1",
     "password": "123456789"
 }
 
@@ -107,8 +107,8 @@ POST http://localhost:8081/auth/users/login
 Content-Type: application/json
 
 {
-    "loginEntity": "eve@gmail.com",
-    "password": "12345678"
+    "loginEntity": "smithjohn1@gmail.com",
+    "password": "123456789"
 }
 
 ### Login user
@@ -157,8 +157,8 @@ Content-Type: application/json
 
 {
     "username": "john_doe",
-    "image": "https://example.com/image.png",
-    "text": "am getting married next week, I just wanted to tell you this is her"
+    "text": "am getting married next week, I just wanted to tell you this is her, guys, she is just the one everytime I see her I feel like an angel is missing in heaven, she looks like one of them",
+    "image": "https://example.com/bride.png"
 }
 
 ### create a post - text
@@ -181,7 +181,7 @@ Content-Type: application/json
 }
 
 ### get a single post
-GET http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+GET http://localhost:8081/posts/12298426-9f66-465c-a94b-7c1a7e65bd71
 
 ### update a post
 PATCH http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
@@ -202,9 +202,41 @@ Content-Type: application/json
 }
 
 ### DELETE A POST
-DELETE http://localhost:8081/posts/aa4e43b2-1db4-4cf5-ac58-3a2bbe6136d5
+DELETE http://localhost:8081/posts/12298426-9f66-465c-a94b-7c1a7e65bd71
 Content-Type: application/json
 
 {
     "username": "john_doe"
 }
+
+
+
+# all about comments
+# d904a80e-4c16-48a2-a011-b0002a1f1dc1 -> test comments with this link
+### create a comment
+POST http://localhost:8081/comments/d904a80e-4c16-48a2-a011-b0002a1f1dc1
+Content-Type: application/json
+
+{
+    "author": "dennis_otwoma",
+    "comment_text": "That is very cute of you guys, hoping to get there soon"
+}
+
+### create a comment
+POST http://localhost:8081/comments/d904a80e-4c16-48a2-a011-b0002a1f1dc1
+Content-Type: application/json
+
+{
+    "author": "I_am-eve22",
+    "comment_text": "Congratulations man, once again, am happy for you"
+}
+
+### update a comment
+PATCH http://localhost:8081/comments/123CommentId
+
+### delete a comment
+DELETE  http://localhost:8081/comments/123CommentId
+
+
+### get a single post
+GET http://localhost:8081/posts/d904a80e-4c16-48a2-a011-b0002a1f1dc1

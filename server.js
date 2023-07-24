@@ -4,6 +4,7 @@ import userRoutes from "./routes/users.routes.js";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/posts.routes.js";
+import commentsRoutes from "./routes/comments.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(
 userRoutes(app);
 authRoutes(app);
 postRoutes(app);
+commentsRoutes(app);
 
 const PORT = config.port || 5000;
 

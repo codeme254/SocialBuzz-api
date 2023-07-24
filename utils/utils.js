@@ -28,3 +28,5 @@ export const checkIfEmailIsTaken = async (emailAddress) => {
     console.log(e.message);
   }
 };
+
+// get all comments for a certain post

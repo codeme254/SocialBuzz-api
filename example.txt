@@ -1,0 +1,14 @@
+{
+    "post_id": "09a22101-e962-4cc1-bdf2-aac31ecf989c",
+    "author": "doe",
+    "text": "Guys, here are my thoughts on what the government should be doing to end hunger:\nTo effectively combat hunger, the government must take comprehensive and sustainable measures. First and foremost, investing in agricultural development is vital. Providing small-scale farmers with access to modern technologies, better seeds, and efficient irrigation systems can significantly increase food production and income. Additionally, promoting sustainable farming practices and supporting agroforestry projects can enhance resilience against climate change and improve long-term food security.",
+    "image": null,
+    "dateCreated": "2023-07-24T12:34:06.767Z",
+    "lastUpdated": "2023-07-24T12:34:06.767Z",
+    "numberOfLikes": 1,
+    "numberOfComments": 0,
+    "firstName": "Dennis",
+    "lastName": "Doe",
+    "username": "doe",
+    "profilePhoto": "https://firebasestorage.googleapis.com/v0/b/socialbuzz-images.appspot.com/o/profile_photos%2Fuser-photo-test.jpg056c9324-9017-47e8-b8c9-ddbb4bdca796?alt=media&token=488132e6-be89-4b06-86ef-875f69269caf"
+  }

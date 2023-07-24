@@ -8,7 +8,9 @@ await pool.connect();
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await pool.request().query("SELECT * FROM posts");
+    const posts = await pool
+      .request()
+      .query("SELECT * FROM postsPopulated WHERE author != 'john_doe'");
     if (posts.recordsets[0].length <= 0)
       return res.status(204).json({ message: "No posts at this time" });
     return res.status(200).json(posts.recordsets[0]);
@@ -121,8 +123,6 @@ export const updatePost = async (req, res) => {
         .status(400)
         .json({ message: "No update done, maybe you don't own the post" });
     }
-
-    return res.status(200).json(result);
   } catch (e) {
     return res.status(400).json({ message: e.message });
   }
@@ -143,12 +143,10 @@ export const deletePost = async (req, res) => {
       );
 
     if (!userOwnsPost.recordset.length) {
-      return res
-        .status(401)
-        .json({
-          message:
-            "There was an error: either you don't own the post or it doesn't exist ",
-        });
+      return res.status(401).json({
+        message:
+          "There was an error: either you don't own the post or it doesn't exist ",
+      });
     } else {
       await pool
         .request()
