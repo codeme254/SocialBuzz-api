@@ -17,12 +17,6 @@ CREATE TABLE users (
   numberOfPosts INT DEFAULT 0
 );
 
-INSERT INTO users (username, firstName, lastName, emailAddress, statusText, password, profilePhoto, coverPhoto)
-VALUES ('john_doe', 'John', 'Doe', 'john.doe@example.com', 'Active user', 'password123', 'https://example.com/john_doe.jpg', 'https://example.com/john_doe_cover.jpg');
-
-INSERT INTO users (username, firstName, lastName, emailAddress, statusText, password, profilePhoto, coverPhoto)
-VALUES ('jane_smith', 'Jane', 'Smith', 'jane.smith@example.com', 'New user', 'securepass456', 'https://example.com/jane_smith.jpg', 'https://example.com/jane_smith_cover.jpg');
-
 
 CREATE TABLE posts (
   post_id VARCHAR(255) PRIMARY KEY,
@@ -36,6 +30,7 @@ CREATE TABLE posts (
   FOREIGN KEY (author) REFERENCES users(username)
 );
 
+
 CREATE TABLE comments (
   comment_id VARCHAR(255) PRIMARY KEY,
   author VARCHAR(20) NOT NULL,
@@ -47,7 +42,11 @@ CREATE TABLE comments (
   FOREIGN KEY (post_id) REFERENCES posts(post_id)
 );
 
-SELECT * FROM comments;
+CREATE TABLE follows (
+  followed VARCHAR(20) REFERENCES users(username),
+  follower VARCHAR(20) REFERENCES users(username)
+);
+
 
 CREATE VIEW post_feeds AS
 SELECT
@@ -70,23 +69,4 @@ FROM
 
 select * from post_feeds;
 
-SELECT 
-    p.post_id,
-    p.author,
-    p.text,
-    p.image,
-    p.dateCreated,
-    p.lastUpdated,
-    p.numberOfLikes,
-    p.numberOfComments,
-    u.firstName,
-    u.lastName,
-    u.username,
-    u.profilePhoto
-INTO postsPopulated
-FROM
-    posts p
-JOIN
-    users u ON p.author = u.username;
 
-SELECT * FROM postsPopulated;

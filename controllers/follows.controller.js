@@ -89,7 +89,9 @@ export const getUsersNotFollowedByCurrentUser = async (req, res) => {
     const allUsers = await pool
       .request()
       .query(
-        "SELECT username, firstName, lastName, emailAddress, statusText, profilePhoto, coverPhoto, dateCreated, numberOfFollowers, numberOfFollowing, numberOfPosts FROM users"
+        `SELECT username, firstName, lastName, emailAddress, statusText, 
+        profilePhoto, coverPhoto, dateCreated, numberOfFollowers, numberOfFollowing, numberOfPosts FROM users 
+        WHERE username != 'john_doe' AND username != 'jane_smith'`
       );
     const allUsersArray = allUsers.recordset;
     const usersNotFollowed = [];

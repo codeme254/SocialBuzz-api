@@ -2,7 +2,7 @@
 GET http://localhost:8081/users
 
 ### Get a specific user
-GET http://localhost:8081/users/doe
+GET http://localhost:8081/users/I_am-eve22
 
 ### Get a specific user - testing for no existing user
 GET http://localhost:8081/users/smith_john1
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Delete a user
-DELETE http://localhost:8081/users/smith_john1
+DELETE http://localhost:8081/users/otwoma
 
 ### Get a specific user - testing for no existing user
 GET http://localhost:8081/users/smith_john
