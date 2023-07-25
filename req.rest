@@ -2,7 +2,7 @@
 GET http://localhost:8081/users
 
 ### Get a specific user
-GET http://localhost:8081/users/dennis_otwoma
+GET http://localhost:8081/users/doe
 
 ### Get a specific user - testing for no existing user
 GET http://localhost:8081/users/smith_john1
@@ -204,8 +204,11 @@ Content-Type: application/json
 ### get all posts
 GET http://localhost:8081/posts
 
+### get a user
+GET http://localhost:8081/users/doe
+
 ### DELETE A POST
-DELETE http://localhost:8081/posts/d247268b-5a8c-4d00-9b18-d761b29ebe21
+DELETE http://localhost:8081/posts/2b977f3b-2200-4c70-a65c-c07e287d346f
 Content-Type: application/json
 
 {
@@ -233,6 +236,9 @@ Content-Type: application/json
     "author": "I_am-eve22",
     "comment_text": "Congratulations man, once again, am happy for you"
 }
+
+### Get all comments belonging to a post
+GET http://localhost:8081/comments/3788d93d-5267-419f-953f-d3df40dc2487
 
 ### update a comment
 PATCH http://localhost:8081/comments/123CommentId

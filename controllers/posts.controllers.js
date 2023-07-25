@@ -13,16 +13,19 @@ export const getAllPosts = async (req, res) => {
       .query("SELECT * FROM posts WHERE author != 'john_doe'");
     if (posts.recordsets[0].length <= 0)
       return res.status(204).json({ message: "No posts at this time" });
-    
-    const allPosts = posts.recordsets[0]
-    for (let i = 0; i < allPosts.length; i++){
+
+    const allPosts = posts.recordsets[0];
+    for (let i = 0; i < allPosts.length; i++) {
       const currentPostAuthor = allPosts[i].author;
-      const authorDetails = await pool.request()
-      .input("author", mssql.VarChar, currentPostAuthor)
-      .query('SELECT firstName, lastName, username, profilePhoto FROM users WHERE username = @author');
-      allPosts[i].author = authorDetails.recordset[0]
+      const authorDetails = await pool
+        .request()
+        .input("author", mssql.VarChar, currentPostAuthor)
+        .query(
+          "SELECT firstName, lastName, username, profilePhoto FROM users WHERE username = @author"
+        );
+      allPosts[i].author = authorDetails.recordset[0];
     }
-    return res.send(allPosts)
+    return res.send(allPosts);
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
@@ -45,6 +48,14 @@ export const createPost = async (req, res) => {
           .query(
             "INSERT INTO posts (post_id, author, text, image) VALUES(@post_id, @username, @text, @image)"
           );
+
+        await pool
+          .request()
+          .input("username", mssql.VarChar, username)
+          .query(
+            "UPDATE users SET numberOfPosts = numberOfPosts + 1 WHERE username = @username"
+          );
+
         return res.status(200).json({ message: "Post published successfully" });
       } else if (image) {
         const post_id = crypto.randomUUID();
@@ -56,6 +67,12 @@ export const createPost = async (req, res) => {
           .query(
             "INSERT INTO posts (post_id, author, image) VALUES(@post_id, @username, @image)"
           );
+        await pool
+          .request()
+          .input("username", mssql.VarChar, username)
+          .query(
+            "UPDATE users SET numberOfPosts = numberOfPosts + 1 WHERE username = @username"
+          );
         return res.status(200).json({ message: "Post published successfully" });
       } else if (text) {
         const post_id = crypto.randomUUID();
@@ -66,6 +83,12 @@ export const createPost = async (req, res) => {
           .input("text", mssql.Text, text)
           .query(
             "INSERT INTO posts (post_id, author, text) VALUES(@post_id, @username, @text)"
+          );
+        await pool
+          .request()
+          .input("username", mssql.VarChar, username)
+          .query(
+            "UPDATE users SET numberOfPosts = numberOfPosts + 1 WHERE username = @username"
           );
         return res.status(200).json({ message: "Post published successfully" });
       } else {
@@ -164,6 +187,13 @@ export const deletePost = async (req, res) => {
         .query(
           "DELETE FROM posts WHERE author = @username AND post_id = @post_id"
         );
+      await pool
+        .request()
+        .input("username", mssql.VarChar, username)
+        .query(
+          "UPDATE users SET numberOfPosts = numberOfPosts -1 WHERE username = @username"
+        );
+
       return res.status(200).json({ message: "Post deleted successfully" });
     }
   } catch (e) {

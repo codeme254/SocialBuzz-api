@@ -65,6 +65,43 @@ export const updateComment = async (req, res) => {
   }
 };
 
+export const getCommentsBelongingToAPost = async (req, res) => {
+  const { post_id } = req.params;
+
+  try {
+    const comments = await pool
+      .request()
+      .input("post_id", mssql.VarChar, post_id)
+      .query(
+        "SELECT * FROM comments WHERE post_id = @post_id ORDER BY dateCreated DESC"
+      );
+
+    if (comments.recordset <= 0)
+      return res
+        .status(200)
+        .json({ message: "No comment, be the first to comment" });
+
+    const commentsArray = comments.recordset;
+
+    for (let i = 0; i < commentsArray.length; i++) {
+      const currentComment = commentsArray[i];
+      const commentAuthor = currentComment.author;
+
+      const commentAuthorDetails = await pool
+        .request()
+        .input("username", mssql.VarChar, commentAuthor)
+        .query(
+          "SELECT firstName, lastName, username, profilePhoto FROM users WHERE username = @username"
+        );
+      currentComment.author = commentAuthorDetails.recordset[0];
+    }
+
+    return res.status(200).json(commentsArray);
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 export const deleteComment = async (req, res) => {
   const { comment_id } = req.params;
   const { author } = req.body;
