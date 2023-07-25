@@ -249,3 +249,24 @@ DELETE  http://localhost:8081/comments/123CommentId
 
 ### get a single post
 GET http://localhost:8081/posts/d904a80e-4c16-48a2-a011-b0002a1f1dc1
+
+### The follows relationship
+
+### Create a follow relationship
+POST http://localhost:8081/follows/dennis_otwoma/I_am-eve22
+# Here, it will mean I_am-eve22 is the logged in user and dennis_otwoma is the user being followed
+
+### Create a follow relationship
+POST http://localhost:8081/follows/I_am-eve22/dennis_otwoma
+
+
+
+### Create a follow relationship
+DELETE http://localhost:8081/follows/I_am-eve22/dennis_otwoma
+# in this context, dennis_otwoma is the logged in user unfollowing I_am-eve22
+
+### Delete a follow relationship
+DELETE http://localhost:8081/follows/user-id-1/user-id-2
+
+### Get all users not being followed by the current user/all users that the current user is not following
+GET http://localhost:8081/follows/not_following/dennis_otwoma
